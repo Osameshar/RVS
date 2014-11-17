@@ -7,6 +7,8 @@ public var walkAnimation : AnimationClip;
 public var runAnimation : AnimationClip;
 public var jumpPoseAnimation : AnimationClip;
 
+public var attackAnimation : AnimationClip;
+
 public var walkMaxAnimationSpeed : float = 0.75;
 public var trotMaxAnimationSpeed : float = 1.0;
 public var runMaxAnimationSpeed : float = 1.0;
@@ -190,7 +192,7 @@ function UpdateSmoothedMovementDirection ()
 		_characterState = CharacterState.Idle;
 		
 		// Pick speed modifier
-		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
+		if (Input.GetButton ("Sprint"))
 		{
 			targetSpeed *= runSpeed;
 			_characterState = CharacterState.Running;
@@ -299,6 +301,12 @@ function Update() {
 		lastJumpButtonTime = Time.time;
 	}
 
+	if(Input.GetButton("Attack"))
+	 {
+	     animation.Play(attackAnimation.name);
+	     
+	 }
+	 
 	UpdateSmoothedMovementDirection();
 	
 	// Apply gravity
